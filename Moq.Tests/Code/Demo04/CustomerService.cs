@@ -5,7 +5,7 @@
         private readonly ICustomerRepository _customerRepository;
         private readonly IMailingAddressFactory _mailingAddressFactory;
 
-        public CustomerService(ICustomerRepository customerRepository, 
+        public CustomerService(ICustomerRepository customerRepository,
             IMailingAddressFactory mailingAddressFactory)
         {
             _customerRepository = customerRepository;
@@ -16,18 +16,15 @@
         {
             var customer = new Customer(customerToCreate.Name);
 
-             MailingAddress mailingAddress;
-             var mailingAddressSuccessfullyCreated = 
-                 _mailingAddressFactory.TryParse(
-                    customerToCreate.Address, 
-                    out mailingAddress);
+            MailingAddress mailingAddress;
+            var mailingAddressSuccessfullyCreated = _mailingAddressFactory.TryParse(customerToCreate.Address, out mailingAddress);
 
-             if (mailingAddress == null)
-             {
-                 throw new InvalidMailingAddressException();
-             }
-             customer.MailingAddress = mailingAddress;
-             _customerRepository.Save(customer);
-         }
+            if (mailingAddress == null)
+            {
+                throw new InvalidMailingAddressException();
+            }
+            customer.MailingAddress = mailingAddress;
+            _customerRepository.Save(customer);
+        }
     }
 }

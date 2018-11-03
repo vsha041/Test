@@ -14,10 +14,14 @@ namespace Moq.Tests.Tests.Demo04
                 //Arrange
                 var mockCustomerRepository = new Mock<ICustomerRepository>();
                 var mockMailingAddressFactory = new Mock<IMailingAddressFactory>();
+                var mailingAddress = new MailingAddress
+                {
+                    Country = "Canada"
+                };
 
+                mockMailingAddressFactory.Setup(x => x.TryParse(It.IsAny<string>(), out mailingAddress)).Returns(true);
 
-                var customerService = new CustomerService(
-                    mockCustomerRepository.Object, mockMailingAddressFactory.Object);
+                var customerService = new CustomerService(mockCustomerRepository.Object, mockMailingAddressFactory.Object);
 
                 //Act
                 customerService.Create(new CustomerToCreateDto());
