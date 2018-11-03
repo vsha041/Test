@@ -17,7 +17,7 @@ namespace Moq.Tests.Tests.Demo07
 
                 var customerToCreate = new CustomerToCreateDto
                                            {
-                                               DesiredStatus = CustomerStatus.Bronze, 
+                                               DesiredStatus = CustomerStatus.Platinum, 
                                                FirstName = "Bob", 
                                                LastName = "Builder"
                                            };
