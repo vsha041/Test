@@ -15,12 +15,8 @@
 
         public void Create(CustomerToCreateDto customerToCreateDto)
         {
-            var fullName = _customerFullName.From(
-                customerToCreateDto.FirstName, 
-                customerToCreateDto.LastName);
-
-            var customer = new Customer(fullName);
-
+            string fullName = _customerFullName.From(customerToCreateDto.FirstName, customerToCreateDto.LastName);
+            Customer customer = new Customer(fullName);
             _customerRepository.Save(customer);
         }
     }
