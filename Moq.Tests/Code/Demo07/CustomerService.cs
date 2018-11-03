@@ -13,11 +13,9 @@
 
         public void Create(CustomerToCreateDto customerToCreate)
          {
-             var customer = new Customer(
-                 customerToCreate.FirstName, customerToCreate.LastName);
+             var customer = new Customer(customerToCreate.FirstName, customerToCreate.LastName);
              
-             customer.StatusLevel = 
-                 _customerStatusFactory.CreateFrom(customerToCreate);
+             customer.StatusLevel = _customerStatusFactory.CreateFrom(customerToCreate);
 
              if (customer.StatusLevel == CustomerStatus.Platinum)
              {

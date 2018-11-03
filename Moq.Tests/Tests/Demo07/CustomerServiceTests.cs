@@ -22,17 +22,20 @@ namespace Moq.Tests.Tests.Demo07
                                                LastName = "Builder"
                                            };
 
+                // when the createFrom method is called, it's parameter's DesiredStatus property will be 
+                // CustomerStatus.Platinum and the function itself will return CustomerStatus.Platinum
+                // this way it will execute the appropriate branching logic.
+                mockCustomerStatusFactory
+                    .Setup(x => x.CreateFrom(It.Is<CustomerToCreateDto>(y => y.DesiredStatus == CustomerStatus.Platinum)))
+                    .Returns(CustomerStatus.Platinum);
 
-
-                var customerService = new CustomerService(
-                    mockCustomerRepository.Object, mockCustomerStatusFactory.Object);
+                var customerService = new CustomerService(mockCustomerRepository.Object, mockCustomerStatusFactory.Object);
 
                 //Act
                 customerService.Create(customerToCreate);
 
                 //Assert
-                mockCustomerRepository.Verify(
-                    x=>x.SaveSpecial(It.IsAny<Customer>()));
+                mockCustomerRepository.Verify(x=>x.SaveSpecial(It.IsAny<Customer>()));
             }
         }
     }
