@@ -22,9 +22,10 @@ namespace Moq.Tests.Tests.Demo05
                 var mockCustomerRepository = new Mock<ICustomerRepository>();
                 var mockIdFactory = new Mock<IIdFactory>();
 
+                var i = 1;
+                mockIdFactory.Setup(x => x.Create()).Returns(() => i).Callback(() => i++);
 
-                var customerService = new CustomerService(
-                    mockCustomerRepository.Object, mockIdFactory.Object);
+                var customerService = new CustomerService(mockCustomerRepository.Object, mockIdFactory.Object);
 
                 //Act
                 customerService.Create(listOfCustomersToCreate);

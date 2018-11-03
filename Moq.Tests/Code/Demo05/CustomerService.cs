@@ -19,9 +19,7 @@ namespace Moq.Tests.Code.Demo05
         {
             foreach (var customerToCreateDto in customersToCreate)
             {
-                var customer = new Customer(
-                    customerToCreateDto.FirstName, 
-                    customerToCreateDto.LastName);
+                var customer = new Customer(customerToCreateDto.FirstName, customerToCreateDto.LastName);
 
                 customer.Id = _idFactory.Create();
                 
