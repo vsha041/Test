@@ -13,13 +13,8 @@ namespace Moq.Tests.Code.Demo09
 
         public void Create(CustomerToCreateDto customerToCreate)
          {
-            var customer = new Customer(
-                customerToCreate.FirstName, 
-                customerToCreate.LastName);
-
-            _customerRepository.LocalTimeZone = 
-                TimeZone.CurrentTimeZone.StandardName;
-
+            var customer = new Customer(customerToCreate.FirstName, customerToCreate.LastName);
+            _customerRepository.LocalTimeZone = TimeZone.CurrentTimeZone.StandardName;
             _customerRepository.Save(customer);
          }
     }

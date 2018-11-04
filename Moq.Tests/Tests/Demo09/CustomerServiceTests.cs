@@ -14,14 +14,13 @@ namespace Moq.Tests.Tests.Demo09
                 //Arrange
                 var mockCustomerRepository = new Mock<ICustomerRepository>();
 
-                var customerService = new CustomerService(
-                    mockCustomerRepository.Object);
+                var customerService = new CustomerService(mockCustomerRepository.Object);
 
                 //Act
                 customerService.Create(new CustomerToCreateDto());
 
                 //Assert
-
+                mockCustomerRepository.VerifySet(x => x.LocalTimeZone = It.IsAny<string>());
             }
         }
     }

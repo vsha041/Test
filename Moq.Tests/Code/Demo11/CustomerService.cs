@@ -15,11 +15,7 @@
         {
             var customer = new Customer(customerToCreate.Name);
 
-            var workstationId = 
-                _applicationSettings
-                    .SystemConfiguration
-                    .AuditingInformation
-                    .WorkstationId;
+            var workstationId = _applicationSettings.SystemConfiguration.AuditingInformation.WorkstationId;
 
             if (!workstationId.HasValue)
             {
