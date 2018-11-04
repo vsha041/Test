@@ -13,9 +13,11 @@
 
         public void Create(CustomerToCreateDto customerToCreate)
         {
-            var customer = new Customer(customerToCreate.Name);
+            var customer = new Customer(customerToCreate.Name)
+            {
+                Address = _customerAddressFormatter.For(customerToCreate)
+            };
 
-            customer.Address = _customerAddressFormatter.For(customerToCreate);
 
             _customerRepository.Save(customer);
         }

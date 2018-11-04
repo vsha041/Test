@@ -15,10 +15,10 @@
         {
             var customer = new Customer(customerToCreate.Name);
 
-            var addressFormatter = _addressFormatterFactory.From(
-                customerToCreate.Country);
+            var addressFormatter = _addressFormatterFactory.From(customerToCreate.Country);
 
-//            customer.Address = addressFormatter.From(customerToCreate);
+            // we want to verify that the From method of IAddressFormatterFactory is actually executed
+            customer.Address = addressFormatter.From(customerToCreate);
 
             _customerRepository.Save(customer);
         }

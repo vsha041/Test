@@ -13,21 +13,22 @@ namespace Moq.Tests.Tests.Demo16
             {
                 //Arrange
                 var mockCustomerRepository = new Mock<ICustomerRepository>();
-                var mockAddressFormatterFactory = 
-                    new Mock<IAddressFormatterFactory> 
-                        {DefaultValue = DefaultValue.Mock};
 
-                var customerService = new CustomerService(
-                    mockCustomerRepository.Object, 
-                    mockAddressFormatterFactory.Object);
+                // Mock object returning a Mock object
+                var mockAddressFormatterFactory = new Mock<IAddressFormatterFactory>
+                {
+                    DefaultValue = DefaultValue.Mock
+                };
 
-                var addressFormatter = mockAddressFormatterFactory
-                    .Object.From(It.IsAny<string>());
-                var mock = Mock.Get(addressFormatter);
+                IAddressFormatter addressFormatter = mockAddressFormatterFactory.Object.From(It.IsAny<string>());
+                Mock<IAddressFormatter> mock = Mock.Get(addressFormatter);
 
                 //Act
+                var customerService = new CustomerService(mockCustomerRepository.Object, mockAddressFormatterFactory.Object);
+                customerService.Create(new CustomerToCreateDto());
 
                 //Assert
+                mock.Verify(x => x.From(It.IsAny<CustomerToCreateDto>()));
             }
         }
     }

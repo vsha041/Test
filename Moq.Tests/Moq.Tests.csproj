@@ -182,7 +182,6 @@
     <Compile Include="Tests\Demo16\CustomerServiceTests.cs" />
     <Compile Include="Tests\Demo17\CustomerServiceTests.cs" />
     <Compile Include="Tests\Demo18\CustomerNameFormatterTests.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
