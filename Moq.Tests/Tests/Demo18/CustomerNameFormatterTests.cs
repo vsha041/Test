@@ -1,4 +1,5 @@
 ﻿using Moq.Tests.Code.Demo18;
+using Moq.Protected;
 using NUnit.Framework;
 
 namespace Moq.Tests.Tests.Demo18
@@ -13,9 +14,8 @@ namespace Moq.Tests.Tests.Demo18
             {
                 //Arrange
                 var mockCustomerNameFormatter = new Mock<CustomerNameFormatter>();
-
-
-
+                mockCustomerNameFormatter.Protected().Setup<string>("ParseBadWordsFrom", ItExpr.IsAny<string>()).Returns("asdf").Verifiable();
+                
                 //Act
                 mockCustomerNameFormatter.Object.From(new Customer());
 
