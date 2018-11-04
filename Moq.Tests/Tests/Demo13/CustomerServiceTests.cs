@@ -15,15 +15,14 @@ namespace Moq.Tests.Tests.Demo13
                 var mockCustomerRepository = new Mock<ICustomerRepository>();
                 var mockMailingRepository = new Mock<IMailingRepository>();
 
-                var customerService = new CustomerService(
-                    mockCustomerRepository.Object, mockMailingRepository.Object);
+                var customerService = new CustomerService(mockCustomerRepository.Object, mockMailingRepository.Object);
 
                 //Act
-
+                //mockCustomerRepository.Raise(x => x.NotifySalesTeam += null, new NotifySalesTeamEventArgs("jim"));
+                mockCustomerRepository.Raise(x => x.NotifySalesTeam += null, "jim", false);
 
                 //Assert
-                mockMailingRepository.Verify(
-                    x => x.NewCustomerMessage(It.IsAny<string>()));
+                mockMailingRepository.Verify(x => x.NewCustomerMessage(It.IsAny<string>()));
             }
         }
     }

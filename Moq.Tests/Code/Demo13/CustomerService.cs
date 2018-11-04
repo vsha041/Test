@@ -5,14 +5,17 @@
         private readonly ICustomerRepository _customerRepository;
         private readonly IMailingRepository _mailingRepository;
 
-        public CustomerService(
-            ICustomerRepository customerRepository, 
-            IMailingRepository mailingRepository)
+        public CustomerService(ICustomerRepository customerRepository, IMailingRepository mailingRepository)
         {
             _customerRepository = customerRepository;
             _mailingRepository = mailingRepository;
 
             _customerRepository.NotifySalesTeam += NotifySalesTeam;
+        }
+
+        private void NotifySalesTeam(string name, bool broadcastToAllEmployees)
+        {
+            _mailingRepository.NewCustomerMessage(name);
         }
 
         private void NotifySalesTeam(object sender, NotifySalesTeamEventArgs e)
