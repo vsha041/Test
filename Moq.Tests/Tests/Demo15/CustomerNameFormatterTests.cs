@@ -15,10 +15,11 @@ namespace Moq.Tests.Tests.Demo15
                 var mockNameFormatter = new Mock<CustomerNameFormatter>();
 
                 //Act
+                //mockNameFormatter.Setup(x => x.From(new Customer("Bob", "SAPBuilder")));
                 mockNameFormatter.Object.From(new Customer("Bob", "SAPBuilder"));
 
                 //Assert
-
+                mockNameFormatter.Verify(x => x.ParseBadWordsFrom(It.IsAny<string>()), Times.Exactly(2));
             }
         }
     }

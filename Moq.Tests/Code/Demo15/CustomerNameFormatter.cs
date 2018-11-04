@@ -7,7 +7,7 @@
              var firstName = ParseBadWordsFrom(customer.FirstName);
              var lastName = ParseBadWordsFrom(customer.LastName);
 
-             return string.Format("{0}, {1}", lastName, firstName);
+             return $"{lastName}, {firstName}";
          }
     }
 }
